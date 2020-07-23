@@ -19,6 +19,19 @@ router.get('/', async (req, res) => {
   }
 })
 
+// Routes GET api/posts/:id
+//Description: GET post
+router.get('/:id', async (req, res) => {
+  try {
+    const post = await Posts.findById(req.params.id);
+    if (!post) throw Error('No Items');
+    res.status(200).json(post);
+  }
+  catch (err) {
+    res.status(400).json({ msg: err })
+  }
+})
+
 //Routes POST api/posts
 //Description: create a post
 router.post('/', async (req, res) => {

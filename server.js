@@ -14,7 +14,11 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 //CONNET TO MONGODB
-mongoose.connect(MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(MONGO_URI, {   
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useNewUrlParser: true,
+  useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected!'))
   .catch(err => console.log(err));
 
