@@ -13,7 +13,8 @@ router.get('/', async (req, res) => {
     const posts = await Posts.find();
     if (!posts) throw Error('No Items');
     res.status(200).json(posts);
-  } catch (err) {
+  }
+  catch (err) {
     res.status(400).json({ msg: err })
   }
 })
@@ -32,6 +33,19 @@ router.post('/', async (req, res) => {
   } catch (err) {
     res.status(400).json({ msg: err })
 
+  }
+})
+
+// Routes DELETE api/posts/:id
+//Description: DELETE post
+router.delete('/:id', async (req, res) => {
+  try {
+    const post = await Posts.findByIdAndDelete(req.params.id) //getting post id from parameters and deleting that specific post
+    if (!post) throw Error('No post found');
+    res.status(200).json({ success: true })
+  }
+  catch (err) {
+    res.status(400).json({ msg: err })
   }
 })
 
