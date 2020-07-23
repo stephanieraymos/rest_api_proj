@@ -49,4 +49,17 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
+// Routes PATCH api/posts/:id
+//Description: Update post
+router.patch('/:id', async (req, res) => {
+  try {
+    const post = await Posts.findByIdAndUpdate(req.params.id, req.body); //getting post id from parameters and updating that specific post
+    if (!post) throw Error('Something went wrong while updating the post');
+    res.status(200).json({ success: true })
+  }
+  catch (err) {
+    res.status(400).json({ msg: err })
+  }
+})
+
 module.exports = router;
